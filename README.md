@@ -128,3 +128,13 @@ API/Tools
 TTY::prompt
 TTY::Table
 gem colorize
+
+
+Aug 15
+-created seed file
+-associated the 3 models
+-created 3 tables
+-updated column data type
+-tonight plan - watch Eric's video, play with gem Prompt, CLI
+-tomorrow plan - setup the login page and sub 1-2 options 
+
