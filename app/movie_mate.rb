@@ -18,10 +18,8 @@ class MovieMate
     interface.welcome
     interface.prompt.yes?("Are you enjoying the app?")
     Loading.go
-    interface.prompt.select("What would you like to do?") do |menu|
-      menu.choice "Sign In", -> {puts "signin"}
-      menu.choice "Register", -> {puts "register"}
-    end
+    interface.login_register_delete_account
+    # interface.home_page
 
   end
 
