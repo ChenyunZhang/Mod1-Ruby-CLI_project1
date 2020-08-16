@@ -1,18 +1,17 @@
-require 'tty-prompt'
 
 class Interface
 
-    attr_accessor :prompt
+    attr_accessor :prompt, :user
 
     def initialize
         @prompt = TTY::Prompt.new
     end
 
     def welcome
-        puts "Welcome to the Movie Mate"
+        puts "Welcome to the Movie Mate".colorize(:red)
     end
 
-    @prompt.yes?("Do you like Ruby?")
+    
 
 
 end
