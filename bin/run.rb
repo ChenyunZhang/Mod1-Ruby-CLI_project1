@@ -1,8 +1,6 @@
 require_relative '../config/environment'
 
-interface = Interface.new()
-interface.title
+interface = Interface.new
+interface.header
 interface.welcome
-interface.choose_login_or_register
-
-
+interface.login_register_delete_account

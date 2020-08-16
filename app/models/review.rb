@@ -1,5 +1,5 @@
 class Review < ActiveRecord::Base
   # add associatons!
-  belongs_to :movie
   belongs_to :user
+  belongs_to :movie
 end
