@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
     prompt = TTY::Prompt.new(active_color: :yellow)
     user_input_name = prompt.ask("What is your username:")
     password = prompt.mask("What is your password:")
-    User.craete(name: user_input_name)
+    User.create(name: user_input_name)
   end
 
   def self.login
