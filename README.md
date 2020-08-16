@@ -138,3 +138,8 @@ Aug 15
 -tonight plan - watch Eric's video, play with gem Prompt, CLI
 -tomorrow plan - setup the login page and sub 1-2 options 
 
+Aug 16
+-finished login page
+-finshed all my movies, review a movie feature, delete my account
+-created helper method to go back to homepage
+-recreated new seed data

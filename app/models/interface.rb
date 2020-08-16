@@ -16,19 +16,18 @@ class Interface
         prompt.select("Please select from the following options.") do |menu|
             menu.choice "🎬Login", -> {User.login} 
             menu.choice "🎬Register", -> {User.create_new_user}
-            menu.choice "🎬Delete_my_account", -> {User.delete_my_account}
         end
     end
 
-    def self.home_page         
-        puts "Welcome to the app, #{user.name}"          
-        prompt.select("Welcome to the Homepage") do |menu|         
-            menu.choice "🍿My Movies", -> {puts "a"}                
-            menu.choice "🍿Review a movie", -> {puts "a"}          
-            menu.choice "🍿View reviews for a movie", -> {puts "a"}    
-            menu.choice "🍿View my comments for a review", -> {puts "a"}                
+    def home_page         
+        #current user is the current instance user      
+        prompt.select("Welcome to the Homepage, #{user.name}!" ) do |menu|         
+            menu.choice "🍿All My Reviewed Movies", -> {user.all_my_review_movies}                
+            menu.choice "🍿Review a movie", -> {user.write_a_movie_review}          
+            menu.choice "🍿View reviews for a movie", -> {puts "a"}                  
             menu.choice "🍿Browse in theater movies", -> {puts "a"}                
-            menu.choice "🍿My profile", -> {puts "a"}               
+            menu.choice "🍿My profile", -> {puts "a"}      
+            menu.choice "🍿Delete_my_account", -> {user.delete_my_account}          
             menu.choice "🍿Logout", -> {puts "a"}   
          end
     end
