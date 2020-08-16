@@ -1,4 +1,7 @@
 require_relative '../config/environment'
 
-app = nameOfYourApp.new
-app.run
+interface = Interface.new
+interface.header
+interface.welcome
+interface.login_register_delete_account
+interface.user = user_instance
