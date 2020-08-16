@@ -1,6 +1,3 @@
-require 'tty-font'
-require 'colorize'
-
 
 class Loading
    
@@ -71,7 +68,7 @@ class Loading
     end
 
     def self.animation
-        5.times do
+        3.times do
           Loading.frame_01
           Loading.frame_02
           Loading.frame_03
@@ -92,4 +89,3 @@ class Loading
 
 end
 
-# Loading.go

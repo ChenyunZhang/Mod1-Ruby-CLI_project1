@@ -1,4 +1,6 @@
 require_relative '../config/environment'
 
-app = nameOfYourApp.new
+
+app = MovieMate.new
 app.run
+

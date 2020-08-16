@@ -53,43 +53,43 @@
 
 
 Login Page
-Register if you don’t have an account
-Login if you already have an account
-Delete my account
+	Register 
+	Login
+	Delete my account
 
 Homepage
-My Movies
-View all my reviewed movies
-Modify my review 
-Add a review
-Delete my review
-Back the to Homepage
-View my watched movies	
-Add a watched movie
-Delete a watched movie
-Back the to Homepage
-Want to watch
-Add a movie to my wish list 
-Delete a movie from my wish list
-Back the to Homepage
-Review a movie
-Pick a movie to review
-Back the to Homepage
-View reviews for a movie
-Pick a movie
-View the comments for this review.
-Comment the movie 
-Back the to Homepage
-View my comments for a review
-All my comments
-Delete my comment
-Back the to Homepage
-Browse in theater movies
-My Profile
-Update my username information
-Update my age information
-Back the to Homepage
-Exit/Logout 
+	My Movies
+		1. View all my reviewed movies
+				Modify my review 
+				Add a review					
+				Delete my review
+				Back the to Homepage
+		2. View my watched movies	
+				Add a watched movie
+				Delete a watched movie
+				Back the to Homepage
+		3. Want to watch
+				Add a movie to my wish list 
+				Delete a movie from my wish list
+				Back the to Homepage
+		4. Review a movie
+				Pick a movie to review
+				Back the to Homepage
+	View reviews for a movie
+		Pick a movie
+		View the comments for this review.
+		Comment the movie 
+		Back the to Homepage
+	View my comments for a review
+		All my comments
+		Delete my comment
+		Back the to Homepage
+		Browse in theater movies
+	My Profile
+		Update my username information
+		Update my age information
+		Back the to Homepage
+	Exit/Logout 
 
 ###############################################
 Movie ==== <  Review >==== User
@@ -138,3 +138,8 @@ Aug 15
 -tonight plan - watch Eric's video, play with gem Prompt, CLI
 -tomorrow plan - setup the login page and sub 1-2 options 
 
+Aug 16
+-finished login page
+-finshed all my movies, review a movie feature, delete my account
+-created helper method to go back to homepage
+-recreated new seed data
