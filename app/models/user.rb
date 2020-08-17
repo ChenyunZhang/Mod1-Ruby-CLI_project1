@@ -89,55 +89,32 @@ class User < ActiveRecord::Base
 
     def update_a_movie_review
       prompt = TTY::Prompt.new(active_color: :yellow)
-      
-      self.reviews
-      self.reviews.first.review
-      self.reviews.first.movie.title
-      [title -review]
-      
-      movies_instance_array = self.movies
-      titles_array = movies_instance_array.map(&:title)
-      prompt.select("Which movie do you wish to update?",  titles_array )
-      binding.pry
-      # if current_movie_instance = Movie.all.find_by(title: movie_title)
-      #   current_review_instance = Review.all.find_by(movie: current_movie_instance, user: self)
-      #   current_review_instance.review = review_statement
-      #   current_review_instance.save
-      
-      #self is a user instance
-      if current_movie_instance = self.movies.find_by(title: movie_title)
-        current_review = self.reviews.find_by(user_id: self.id)
-        current_review.review = review_statement
-      else
-        reviewed_movie = Movie.create(title: movie_title)
-        review = Review.create(user: self, movie: reviewed_movie, review: review_statement, rating: rating_num )
-      end
-      puts "Congratulations!!⭐️ You just reviewed #{movie_title}."
+     
+      review_array = self.reviews.pluck(:review)
+      rating_array = self.reviews.pluck(:rating)
+      titles_array = self.movies.pluck(:title)
+      review_array_list = review_array.map{|comment| "Review: #{comment}" }
+      rating_array_list = rating_array.map{|num| "Rating: #{num}" }
+      titles_array_list = titles_array.map{|title| "Title: #{title}" }
+
+      movie_list = titles_array_list.zip(rating_array_list,review_array_list)
+      movie_list = movie_list.map{|x| x.join(" | ")}
+      user_input = prompt.select("Which movie do you wish to update?",  movie_list )
+      review_section = user_input.rpartition("Review:").last.strip
+
+      Review.all.find_by(review: review_section)
+
+      review_statement = prompt.ask("Let's update your review:")
+      rating_num = prompt.ask("Let's update your rating from 1 - 10:")
+      found_review = self.reviews.find_by(review: review_section)
+      found_review.update(review: review_statement, rating: rating_num)
+     
+      puts "Congratulations!!⭐️ You just updated your review sucessfully."
+
       go_back_to_homepage_with_yes
     end
 
-    # def update_a_movie_review
-    #   prompt = TTY::Prompt.new(active_color: :yellow)
-    #   movie_title = prompt.ask("Which movie are you going to review?:")
-    #   review_statement = prompt.ask("Lets start your review:")
-    #   rating_num = prompt.ask("Rate the movie from 1 - 10:")
-    #   # binding.pry
-    #   # if current_movie_instance = Movie.all.find_by(title: movie_title)
-    #   #   current_review_instance = Review.all.find_by(movie: current_movie_instance, user: self)
-    #   #   current_review_instance.review = review_statement
-    #   #   current_review_instance.save
-      
-    #   #self is a user instance
-    #   if current_movie_instance = self.movies.find_by(title: movie_title)
-    #     current_review = self.reviews.find_by(user_id: self.id)
-    #     current_review.review = review_statement
-    #   else
-    #     reviewed_movie = Movie.create(title: movie_title)
-    #     review = Review.create(user: self, movie: reviewed_movie, review: review_statement, rating: rating_num )
-    #   end
-    #   puts "Congratulations!!⭐️ You just reviewed #{movie_title}."
-    #   go_back_to_homepage_with_yes
-    # end
+   
 
     def view_reviews_for_movie
         movie_list = Movie.all.map(&:title)
@@ -220,6 +197,8 @@ class User < ActiveRecord::Base
 
     def go_back_to_login_page
         #current user has logged out
+        Dance.go
+        system 'clear'
         app = MovieMate.new
         app.run
     end

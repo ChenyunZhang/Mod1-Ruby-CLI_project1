@@ -535,7 +535,7 @@ class Dance
       end
 
       def self.animation
-        5.times do
+        3.times do
           Dance.frame_one
           Dance.frame_two
           Dance.frame_three

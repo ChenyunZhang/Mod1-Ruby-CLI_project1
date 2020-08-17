@@ -933,7 +933,7 @@ ohs.      ms   .mN-                                                    .mN-     
       end
 
       def self.animation
-        10.times do
+        3.times do
           Tuzki.frame_one
           Tuzki.frame_two
           Tuzki.frame_three
