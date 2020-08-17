@@ -143,3 +143,13 @@ Aug 16
 -finshed all my movies, review a movie feature, delete my account
 -created helper method to go back to homepage
 -recreated new seed data
+
+Aug 17
+-finished add a review
+-finished update a review
+-finished update my profile
+-finished Browse in theater movies
+-created helper methods
+- login page bug. fix the loop
+- give better menu names for homepage
+- research dynamic login page

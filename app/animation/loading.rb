@@ -87,5 +87,6 @@ class Loading
         self.animation
       end
 
+
 end
 
