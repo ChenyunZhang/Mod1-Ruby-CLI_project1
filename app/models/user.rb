@@ -70,13 +70,36 @@ class User < ActiveRecord::Base
       go_back_to_homepage_with_yes
     end
 
-
-    def write_a_movie_review
+    def add_new_movie_review
       prompt = TTY::Prompt.new(active_color: :yellow)
       movie_title = prompt.ask("Which movie are you going to review?:")
       review_statement = prompt.ask("Lets start your review:")
       rating_num = prompt.ask("Rate the movie from 1 - 10:")
       
+      if current_movie_instance = Movie.all.find_by(title: movie_title)
+        review = Review.create(user: self, movie: current_movie_instance, review: review_statement, rating: rating_num )       
+      else
+        reviewed_movie = Movie.create(title: movie_title)
+        review = Review.create(user: self, movie: reviewed_movie, review: review_statement, rating: rating_num )
+      end
+      puts "Congratulations!!⭐️ You just added a new review to #{movie_title}."
+      go_back_to_homepage_with_yes
+
+    end
+
+    def update_a_movie_review
+      prompt = TTY::Prompt.new(active_color: :yellow)
+     
+      movies_instance_array = self.movies
+      titles_array = movies_instance_array.map(&:title)
+      prompt.select("Which movie do you wish to update?",  titles_array )
+      binding.pry
+      # if current_movie_instance = Movie.all.find_by(title: movie_title)
+      #   current_review_instance = Review.all.find_by(movie: current_movie_instance, user: self)
+      #   current_review_instance.review = review_statement
+      #   current_review_instance.save
+      
+      #self is a user instance
       if current_movie_instance = self.movies.find_by(title: movie_title)
         current_review = self.reviews.find_by(user_id: self.id)
         current_review.review = review_statement
@@ -88,15 +111,42 @@ class User < ActiveRecord::Base
       go_back_to_homepage_with_yes
     end
 
+    # def update_a_movie_review
+    #   prompt = TTY::Prompt.new(active_color: :yellow)
+    #   movie_title = prompt.ask("Which movie are you going to review?:")
+    #   review_statement = prompt.ask("Lets start your review:")
+    #   rating_num = prompt.ask("Rate the movie from 1 - 10:")
+    #   # binding.pry
+    #   # if current_movie_instance = Movie.all.find_by(title: movie_title)
+    #   #   current_review_instance = Review.all.find_by(movie: current_movie_instance, user: self)
+    #   #   current_review_instance.review = review_statement
+    #   #   current_review_instance.save
+      
+    #   #self is a user instance
+    #   if current_movie_instance = self.movies.find_by(title: movie_title)
+    #     current_review = self.reviews.find_by(user_id: self.id)
+    #     current_review.review = review_statement
+    #   else
+    #     reviewed_movie = Movie.create(title: movie_title)
+    #     review = Review.create(user: self, movie: reviewed_movie, review: review_statement, rating: rating_num )
+    #   end
+    #   puts "Congratulations!!⭐️ You just reviewed #{movie_title}."
+    #   go_back_to_homepage_with_yes
+    # end
+
     def view_reviews_for_movie
         movie_list = Movie.all.map(&:title)
         prompt = TTY::Prompt.new(active_color: :yellow)
         user_choice = prompt.select("Which movie do you want to view?", movie_list.uniq) 
+
         id_of_movie = Movie.all.find_by(title: user_choice).id
-        array_of_reviews = Review.all.where(movie_id: id_of_movie).pluck(:review)
-        array_of_reviews.each_with_index do |review, ind|
-          puts "#{ind +1 }. #{review}."
-        end
+        array_of_reviews = Review.all.where(movie_id: id_of_movie)
+        array_of_reviews.map { |review| puts "#{review.review} --#{review.user.name}" }
+
+        # array_of_reviews = Review.all.where(movie_id: id_of_movie).pluck(:review)
+        # array_of_reviews.each_with_index do |review, ind|
+        #   puts "#{ind +1 }. #{review}."
+        # end
         #add user name after the review. if we have time.
         go_back_to_homepage_with_yes
     end
