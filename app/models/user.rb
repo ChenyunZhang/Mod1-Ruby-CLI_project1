@@ -89,7 +89,12 @@ class User < ActiveRecord::Base
 
     def update_a_movie_review
       prompt = TTY::Prompt.new(active_color: :yellow)
-     
+      
+      self.reviews
+      self.reviews.first.review
+      self.reviews.first.movie.title
+      [title -review]
+      
       movies_instance_array = self.movies
       titles_array = movies_instance_array.map(&:title)
       prompt.select("Which movie do you wish to update?",  titles_array )
