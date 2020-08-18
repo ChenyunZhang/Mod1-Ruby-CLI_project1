@@ -1,55 +1,45 @@
-## Process
+#Movie Mate
 
-### NOTE
-- this setup contains a rakefile with helpful process reminders
+#Movie Mate is a CLI app that allows you to manage your movie reviews, and browser in theater movies.
 
-### Setup
-1. Create Gemfile + run `bundle`
-2. Create migrations: run `rake db:create_migration` and add the syntax you need (e.g. `NAME=create_users`)
-3. Migrate: run `rake db:migrate`
-* **REMEMBER** never ever ever change anything in schema.
-4. Go to `.bin/run.rb` and change the name of the app on line 3 AND/OR go to `Rakefile` and change the name of the app on line 15
-5. Go to `./app/models` and change the names of the files (e.g. `User.rb` <- singular) and the class names inside
-6. Set up association macros in classes (`belongs_to` / `has_many` / `has_many, through:`)
-7. Create seed file in `db/seed.rb` + then run `rake db:seed`
-* remember: seeding does not give you any output so no news on your console == good news
-8. Check if you've seeded correctly: run `rake c` and check what's the last instance of any of your class 
-9. Go to `./app/yourAppName.rb` and change that file's name and whatever is inside (the class name should correspond to what you wrote in `.bin/run.rb` on line 3)
+#How to Install
+1. Clone the repo onto your local machine.
+2. Change the directory to the repo.
+3. In you terminal, run 'bundle install'.
+4. Run 'rake db:migrate'.
+5. Run 'rake db:seed'.
+6. Run 'ruby bin.run.rb' to open the app.
 
-### Coding
-1. Create a dummy version of your logic -> hardcode it and don't yet make your code save anything to the database, just make sure that the logic works
-2. Test often by running the file or by `binding.pry`
-3. What I fould useful is drowing out every step I want to guide users through before coding - my whiteboard looked like this:
-![](Sunday.jpg)
-4. Then I coded the dummy version (without saving to the database, just to see if all "if"s are working and all that jazz)
-5. Then I added the database manipulations.
-6. Then I beautified the code and the app to make it visually pleasing
+## Login / Register Menu
+- Login with a existing account
+- Register if you don't have an account
 
-## APIs
-
-- [Dad Jokes API Docs](https://icanhazdadjoke.com/api)
-- [Sample API Request](https://icanhazdadjoke.com/api#fetch-a-random-dad-joke)
-
-- **[More APIs]**(https://rapidapi.com/collection/cool-apis)
-- [And even more APIs](https://medium.com/@vicbergquist/18-fun-apis-for-your-next-project-8008841c7be9)
-
-## Fun Gems For Your Projects
-- `faker` - randomly generated seed data fun
-- `colorize` - colored text output in your terminal
-- `lolcat` - enabling rainbow text coloring
-- `rest-client` - make HTTP requests and get data from APIs
-- `tty-prompt` - nice interface for prompting for user input
-- `formatador` - styling output information into a neat table
-- `artii` - creating text banners
-
-## Tutorials
-- [Adding animations to your CLI by Sylwia Vargas](https://medium.com/better-programming/add-an-animation-or-a-giph-to-your-ruby-cli-29952e8c46ea)
-- [Adding ASCII Art to your CLI by Sylwia Vargas](https://medium.com/@sylwiavargas/adding-pictures-to-your-ruby-cli-4252b89823a)
-- [Using Time/Date in your CLI by Joel Mendoza](https://medium.com/@joelmendza173/ruby-date-time-for-dummies-9f45518bab64)
+## Main Menu
+1. My Movie Reviews 
+	- Allow users to 
+2. Review a movie
+3. Update a movie
+4. Browse movie reviews
+5. Browse in theater movies
+6. My profile
+7. Delete my account
+7. Logout
 
 
 
-		HEADER TITLE (TBD) idea: Movie Mate, My Movie, Movie Club, (add your idea here)
+
+
+
+
+
+
+
+
+
+
+
+
+HEADER TITLE (TBD) idea: Movie Mate, My Movie, Movie Club, (add your idea here)
 
 
 Login Page
@@ -150,6 +140,13 @@ Aug 17
 -finished update my profile
 -finished Browse in theater movies
 -created helper methods
-- login page bug. fix the loop
-- give better menu names for homepage
-- research dynamic login page
+-[x] login page bug. fix the loop 
+-[x] give better menu names for homepage
+-[x] research dynamic login page
+-[] finish README
+- user stories
+	- As a user, I want to be able to manage my movie reviews.
+	- As a user, I want to be able to browser in theater movie, so I can decide which movie to watch.
+	- As a user, I want to see the reviews for a movie that I'm interested in.
+	- Aa a user, I want to be able to delete my account.
+
