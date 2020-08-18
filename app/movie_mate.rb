@@ -5,6 +5,7 @@ class MovieMate
 
   def run
     Title.header
+    Pokemon.title
     login_page
   end
 
