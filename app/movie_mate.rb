@@ -16,16 +16,11 @@ class MovieMate
 ###############################################################
   def login_page
     interface = Interface.new
-    # interface.welcome
-    # interface.prompt.yes?("Are you enjoying the app?")
-    # Loading.go
-
     #getting back a user instance either by logging in or creating a new user
     user_instance = interface.login_register_delete_account
     #reassign interface.user to a user instance
     interface.user = user_instance
-    
-    # Loading.go
+    Loading.go
     interface.home_page
 
   end

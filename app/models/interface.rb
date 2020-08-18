@@ -21,16 +21,15 @@ class Interface
 
     def home_page         
         #current user is the current instance.user      
-        prompt.select("Welcome to the Homepage, #{user.name}!" ) do |menu|         
-            menu.choice "🍿All My Reviewed Movies", -> {user.all_my_review_movies}       
-            menu.choice "🍿Add a new movie review", -> {user.add_new_movie_review}             
-            menu.choice "🍿Update review a movie", -> {user.update_a_movie_review}          
-            menu.choice "🍿View all reviews for a movie", -> {user.view_reviews_for_movie}                 
+        prompt.select("Welcome to the Homepage, #{user.name}!", per_page: 8) do |menu|         
+            menu.choice "🍿My Movie Reviews", -> {user.all_my_review_movies}       
+            menu.choice "🍿Review a movie", -> {user.add_new_movie_review}             
+            menu.choice "🍿Update my review", -> {user.update_a_movie_review}          
+            menu.choice "🍿Browse movie reviews", -> {user.view_all_reviews_for_movie}                 
             menu.choice "🍿Browse in theater movies", -> {user.browse_in_theater_movie}                
             menu.choice "🍿My profile", -> {user.my_profile}      
-            menu.choice "🍿Delete_my_account", -> {user.delete_my_account}          
-            menu.choice "🍿Logout", -> {user.logout}   
+            menu.choice "😠Delete my account", -> {user.delete_my_account}          
+            menu.choice "🔆Logout", -> {user.logout}   
          end
     end
-
 end

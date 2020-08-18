@@ -27,16 +27,22 @@ class User < ActiveRecord::Base
     prompt = TTY::Prompt.new(active_color: :yellow)
     user_input_name = prompt.ask("User name:")
     found_user = User.all.find_by(name: user_input_name)
+    counter = 4
     until found_user
-      puts "Username not found, try again"
+      puts "Username not found, try again, you have #{counter} times attempts remaining"
       user_input_name = prompt.ask("User name:")
       found_user = User.all.find_by(name: user_input_name)
+      counter -= 1
+      if counter < 1
+        user_1 = User.new
+        puts "Ok, guess you don't have an account with us, please try to register an account."
+        user_1.go_back_to_login_page_with_yes
+      end
     end
     password = prompt.mask("Password:")
     #returning a user instance
     found_user
   end
-
   #############################################################
   #############################################################
   ##  An User instance - user account features
@@ -65,7 +71,7 @@ class User < ActiveRecord::Base
     def all_my_review_movies
       movie_array = self.movies.pluck(:title)
       movie_array.each_with_index do |title, ind|
-        puts "#{ind + 1}. #{title}".colorize(:color => :light_blue)
+        puts "#{ind + 1}. #{title}".colorize(:color => :yellow)
       end
       go_back_to_homepage_with_yes
     end
@@ -75,7 +81,7 @@ class User < ActiveRecord::Base
       movie_title = prompt.ask("Which movie are you going to review?:")
       review_statement = prompt.ask("Lets start your review:")
       rating_num = prompt.ask("Rate the movie from 1 - 10:")
-      
+      # 
       if current_movie_instance = Movie.all.find_by(title: movie_title)
         review = Review.create(user: self, movie: current_movie_instance, review: review_statement, rating: rating_num )       
       else
@@ -114,29 +120,28 @@ class User < ActiveRecord::Base
       go_back_to_homepage_with_yes
     end
 
-   
-
-    def view_reviews_for_movie
-        movie_list = Movie.all.map(&:title)
-        prompt = TTY::Prompt.new(active_color: :yellow)
-        user_choice = prompt.select("Which movie do you want to view?", movie_list.uniq) 
-
-        id_of_movie = Movie.all.find_by(title: user_choice).id
-        array_of_reviews = Review.all.where(movie_id: id_of_movie)
-        array_of_reviews.map { |review| puts "#{review.review} --#{review.user.name}" }
-
-        # array_of_reviews = Review.all.where(movie_id: id_of_movie).pluck(:review)
-        # array_of_reviews.each_with_index do |review, ind|
-        #   puts "#{ind +1 }. #{review}."
-        # end
-        #add user name after the review. if we have time.
-        go_back_to_homepage_with_yes
-    end
+    def view_all_reviews_for_movie
+      movie_list = Movie.order(:title).pluck(:title)
+      prompt = TTY::Prompt.new(active_color: :yellow)
+      # condition if the user is new
+      #if movie_list is empty, "return puts you dont have any re
+      user_choice = prompt.select("Which movie do you want to view?", movie_list.uniq, per_page: 10) 
+      id_of_movie = Movie.all.find_by(title: user_choice).id
+      array_of_reviews = Review.all.where(movie_id: id_of_movie)
+      array_of_reviews.map { |review| puts "#{review.review.colorize(:green)} --#{review.user.name.colorize(:green)}" }
+      # binding.pry
+      # array_of_reviews = Review.all.where(movie_id: id_of_movie).pluck(:review)
+      # array_of_reviews.each_with_index do |review, ind|
+      #   puts "#{ind +1 }. #{review}."
+      # end
+      #add user name after the review. if we have time.
+      go_back_to_homepage_with_yes
+  end
 
     #___________________________________________________________________
     def my_profile
-        puts "Name: #{self.name}".colorize(:blue) 
-        puts "Age: #{self.age}".colorize(:blue) 
+        puts "Name: #{self.name}".colorize(:yellow) 
+        puts "Age: #{self.age}".colorize(:yellow) 
         prompt = TTY::Prompt.new(active_color: :yellow)
         prompt.select("Would you like to update your profile?") do |menu|
           menu.choice "Update my username", -> {self.my_profile_username_update}
@@ -174,7 +179,6 @@ class User < ActiveRecord::Base
 
 
     def logout
-      Loading.go
       go_back_to_login_page
     end
 
@@ -197,11 +201,20 @@ class User < ActiveRecord::Base
 
     def go_back_to_login_page
         #current user has logged out
-        Dance.go
+        Loading.go
         system 'clear'
         app = MovieMate.new
         app.run
     end
+
+    def go_back_to_login_page_with_yes
+      #current user has logged out
+      only_yes
+      Dance.go
+      system 'clear'
+      app = MovieMate.new
+      app.run
+  end
 
     def only_yes
       prompt = TTY::Prompt.new(active_color: :yellow)
