@@ -54,7 +54,7 @@ class Dance
                                                                                                     
                                                                                                     
                                                                                                                           
-      ".colorize(:red)
+      ".colorize(:yellow)
       sleep (0.15)
       system 'clear'
     end
@@ -113,7 +113,7 @@ class Dance
                                                                                                     
                                                                                                     
 
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
@@ -171,7 +171,7 @@ class Dance
                                                                                                     
                                                                                                     
                                                                                                                                               
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
@@ -229,7 +229,7 @@ class Dance
                                                                                                     
                                                                                                     
                                                                                                                                      
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
@@ -287,7 +287,7 @@ class Dance
                                                                                                     
                                                                                                     
                                                                                                                                                                                                 
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
@@ -346,14 +346,14 @@ class Dance
                                                                                                     
                                                                                                     
                                                         
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
 
       def self.frame_seven
         puts "                           
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
@@ -412,7 +412,7 @@ class Dance
                                                                                                     
                                                                                                                              
 
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
@@ -470,7 +470,7 @@ class Dance
                                                                                                     
                                                                                                     
 
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
@@ -529,7 +529,7 @@ class Dance
                                                                                                     
                                                                                                     
                                                          
-        ".colorize(:red)
+        ".colorize(:yellow)
         sleep (0.15)
         system 'clear'
       end
