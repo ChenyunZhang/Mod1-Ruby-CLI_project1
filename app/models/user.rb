@@ -11,6 +11,11 @@ class User < ActiveRecord::Base
   def self.create_new_user
     prompt = TTY::Prompt.new(active_color: :yellow)
     user_input_name = prompt.ask("What is your username:")
+    #user needs to enter a valid username only alphabet and numbers. 
+    while user_input_name.nil? || user_input_name.match(/[\W,\s]/) 
+      puts "Invalid, please enter alphabet and numbers only"
+      user_input_name = prompt.ask("What is your username:")
+    end
     found_user = User.all.find_by(name: user_input_name)
     until !found_user
       puts "Sorry, Username already taken. Try again"

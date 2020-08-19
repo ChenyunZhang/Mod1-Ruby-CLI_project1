@@ -1,4 +1,4 @@
-class Pokemon
+class Image
 
     def self.title
         Catpix::print_image "app/picture/logo_film.png",
