@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
     user_input_name = prompt.ask("What is your username:")
     #user needs to enter a valid username only alphabet and numbers. 
     while user_input_name.nil? || user_input_name.match(/[\W,\s]/) 
-      puts "Invalid, please enter alphabet or numbers only"
+      puts "Invalid, please enter alphabet or numbers only."
       user_input_name = prompt.ask("What is your username:")
     end
     found_user = User.all.find_by(name: user_input_name)
