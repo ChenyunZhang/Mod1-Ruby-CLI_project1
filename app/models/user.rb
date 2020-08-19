@@ -194,7 +194,7 @@ class User < ActiveRecord::Base
     end
 
     def go_back_to_homepage_with_yes
-      only_yes
+      only_yes_home
       Loading.go
       go_back_to_homepage
     end
@@ -209,16 +209,21 @@ class User < ActiveRecord::Base
 
     def go_back_to_login_page_with_yes
       #current user has logged out
-      only_yes
+      only_yes_login
       Dance.go
       system 'clear'
       app = MovieMate.new
       app.run
   end
 
-    def only_yes
+    def only_yes_home
       prompt = TTY::Prompt.new(active_color: :yellow)
       prompt.select("Go back to homepage?", ["Yes"])
+    end
+
+    def only_yes_login
+      prompt = TTY::Prompt.new(active_color: :yellow)
+      prompt.select("Go back to login page?", ["Yes"])
     end
 
     def delay 
