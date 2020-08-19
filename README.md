@@ -14,7 +14,7 @@
 - Login with a existing account
 - Register if you don't have an account
 
-## Main Menu
+## Home Page
 1. My Movie Reviews 
 	- Allow users to browse all the reviews that have been created by the user.
 2. Review a movie
