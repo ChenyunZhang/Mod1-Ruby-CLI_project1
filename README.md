@@ -50,6 +50,7 @@
   - [Colorize](https://github.com/fazibear/colorize)
   - [Activerecord-reset-pk-sequence](https://github.com/rails/rails/tree/master/activerecord)
   - [TTY-Font](https://github.com/piotrmurach/tty-font)
+  - [Catpix](https://github.com/pazdera/catpix)
 
 ## Domain Model
 	Movie ==== <  Review >==== User
