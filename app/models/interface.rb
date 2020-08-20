@@ -22,7 +22,7 @@ class Interface
     def home_page         
         #current user is the current instance.user      
         prompt.select("Welcome to the Homepage, #{user.name}!", per_page: 8) do |menu|         
-            menu.choice "🍿My Movie Reviews", -> {user.all_my_review_movies}       
+            menu.choice "🍿My reviewed movie list", -> {user.all_my_review_movies}       
             menu.choice "🍿Review a movie", -> {user.add_new_movie_review}             
             menu.choice "🍿Update my review", -> {user.update_a_movie_review}          
             menu.choice "🍿Browse movie reviews", -> {user.view_all_reviews_for_movie}                 
