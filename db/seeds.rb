@@ -68,7 +68,7 @@ end
 
 
 # step 3: invoke creating joiners by passing in an instance of a person
-20.times do     
+100.times do     
     create_user()
     create_movie()
     create_joiners(create_user)
@@ -81,4 +81,4 @@ end
 # Plant.update(category_id: indoor.id)
 
 
-puts "🔥 🔥 🔥 🔥 "
+puts "😃"
