@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
           go_back_to_login_page
         }
         menu.choice "No", -> {
-          puts "Good, your not leaving."
+          puts "Good, you are not leaving."
           sleep 2.5
           system 'clear'
           go_back_to_homepage
@@ -104,22 +104,45 @@ class User < ActiveRecord::Base
       review_array = self.reviews.pluck(:review)
       rating_array = self.reviews.pluck(:rating)
       titles_array = self.movies.pluck(:title)
+
       review_array_list = review_array.map{|comment| "Review: #{comment}" }
       rating_array_list = rating_array.map{|num| "Rating: #{num}" }
       titles_array_list = titles_array.map{|title| "Title: #{title}" }
 
       movie_list = titles_array_list.zip(rating_array_list,review_array_list)
       movie_list = movie_list.map{|x| x.join(" | ")}
+      movie_list << "Exit"
       user_input = prompt.select("Which movie do you wish to update?",  movie_list )
       review_section = user_input.rpartition("Review:").last.strip
+
+      if user_input == "Exit"
+        go_back_to_homepage_with_yes
+      end
 
       Review.all.find_by(review: review_section)
 
       review_statement = prompt.ask("Let's update your review:")
-      rating_num = prompt.ask("Let's update your rating from 1 - 10:")
+
+      while review_statement.nil? do
+        review_statement = prompt.ask("Let's update your review:")
+        puts "Please enter a valid review."
+      end
+
+        review_statement
+        
+        rating_num = prompt.ask("Let's update your rating from 1 - 10:")
+
+      while rating_num.nil? do
+        rating_num = prompt.ask("Let's update your rating from 1 - 10:")
+        rating_num.clamp(1,10)
+        puts "Please enter a number from 1 to 10."
+      end
+        rating_num
+
+
       found_review = self.reviews.find_by(review: review_section)
       found_review.update(review: review_statement, rating: rating_num)
-     
+
       puts "Congratulations!!⭐️ You just updated your review sucessfully."
 
       go_back_to_homepage_with_yes
