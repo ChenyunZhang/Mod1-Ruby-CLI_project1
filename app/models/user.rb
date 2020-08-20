@@ -74,10 +74,26 @@ class User < ActiveRecord::Base
 
     #___________________________________________________________________
     def all_my_review_movies
-      movie_array = self.movies.pluck(:title)
-      movie_array.each_with_index do |title, ind|
-        puts "#{ind + 1}. #{title}".colorize(:color => :yellow)
-      end
+      # movie_array = self.movies.pluck(:title)
+      # movie_array.each_with_index do |title, ind|
+      #   puts "#{ind + 1}. #{title}".colorize(:color => :yellow)
+      # end
+      # go_back_to_homepage_with_yes
+      prompt = TTY::Prompt.new(active_color: :yellow)
+     
+      review_array = self.reviews.pluck(:review)
+      rating_array = self.reviews.pluck(:rating)
+      titles_array = self.movies.pluck(:title)
+
+      review_array_list = review_array.map{|comment| "Review: #{comment}" }
+      rating_array_list = rating_array.map{|num| "Rating: #{num}" }
+      titles_array_list = titles_array.map{|title| "Title: #{title}" }
+
+      movie_list = titles_array_list.zip(rating_array_list,review_array_list)
+      movie_list = movie_list.map{|x| x.join(" | ")}
+      movie_list.each_with_index{|movie_1, movie_index|
+        puts "#{movie_index+1}, #{movie_1}"
+      }
       go_back_to_homepage_with_yes
     end
 
@@ -86,7 +102,11 @@ class User < ActiveRecord::Base
       movie_title = prompt.ask("Which movie are you going to review?:")
       review_statement = prompt.ask("Lets start your review:")
       rating_num = prompt.ask("Rate the movie from 1 - 10:")
-      # 
+
+      validate_review_statement(movie_title)
+      validate_review_statement(review_statement)
+      validate_rating_num(rating_num)
+
       if current_movie_instance = Movie.all.find_by(title: movie_title)
         review = Review.create(user: self, movie: current_movie_instance, review: review_statement, rating: rating_num )       
       else
@@ -123,22 +143,10 @@ class User < ActiveRecord::Base
 
       review_statement = prompt.ask("Let's update your review:")
 
-      while review_statement.nil? do
-        review_statement = prompt.ask("Let's update your review:")
-        puts "Please enter a valid review."
-      end
-
-        review_statement
-        
-        rating_num = prompt.ask("Let's update your rating from 1 - 10:")
-
-      while rating_num.nil? do
-        rating_num = prompt.ask("Let's update your rating from 1 - 10:")
-        rating_num.clamp(1,10)
-        puts "Please enter a number from 1 to 10."
-      end
-        rating_num
-
+      validate_review_statement(review_statement)
+      
+      rating_num = prompt.ask("Let's update your rating from 1 - 10:")
+      validate_rating_num(rating_num)
 
       found_review = self.reviews.find_by(review: review_section)
       found_review.update(review: review_statement, rating: rating_num)
@@ -147,6 +155,7 @@ class User < ActiveRecord::Base
 
       go_back_to_homepage_with_yes
     end
+
 
     def view_all_reviews_for_movie
       movie_list = Movie.order(:title).pluck(:title)
@@ -257,6 +266,23 @@ class User < ActiveRecord::Base
     def delay 
       sleep (2.5)
       system 'clear'
+    end
+
+    def validate_rating_num(rating_num)
+      until rating_num.match(/\d/) do
+        rating_num = prompt.ask("Let's update your rating from 1 - 10:")
+        rating_num = rating_num.clamp(1,10)
+        puts "Please enter a number from 1 to 10."
+      end
+      rating_num
+    end
+
+    def validate_review_statement(review_statement)
+      while review_statement.nil? do
+        review_statement = prompt.ask("Let's update your review:")
+        puts "Please enter a valid review."
+      end
+        review_statement
     end
     ################################
 
