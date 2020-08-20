@@ -19,6 +19,3 @@ gem "colorize"
 gem "tty-prompt"
 gem 'tty-font'
 gem 'catpix'
-
-#background music
-gem 'ruby_afplay'

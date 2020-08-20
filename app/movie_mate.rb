@@ -22,7 +22,6 @@ class MovieMate
     interface.user = user_instance
     Loading.go
     interface.home_page
-
   end
 
 

@@ -240,6 +240,7 @@ class User < ActiveRecord::Base
 ###################################################################
 
     def logout
+      Tuzki.go
       go_back_to_login_page
     end
 
