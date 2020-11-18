@@ -8,7 +8,7 @@
 3. In you terminal, run 'bundle install'.
 4. Run 'rake db:migrate'.
 5. Run 'rake db:seed'.
-6. Run 'ruby bin.run.rb' to open the app.
+6. Run 'ruby bin/run.rb' to open the app.
 
 ## Login / Register Menu
 - Login with a existing account
