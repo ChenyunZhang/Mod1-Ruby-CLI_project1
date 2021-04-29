@@ -14,8 +14,8 @@
 Movie Mate is a CLI app that allows users to manage their movie reviews, read other users reviews for the movies, and browser over a hundred in theater movies. 
 
 <div>
-     <img align="center" width=500px src="src/project3_1.png"/>
-     <img align="center" width=500px src="src/project3_2.png"/>
+     <img align="center" width=500px src="app/project1_1.png"/>
+     <img align="center" width=500px src="app/project1_4.png"/>
 </div>
 
 ## Getting started
